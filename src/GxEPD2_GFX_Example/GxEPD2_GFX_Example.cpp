@@ -52,49 +52,6 @@
 
 BitmapDisplay bitmaps(display);
 
-void setup()
-{
-  Serial.begin(115200);
-  Serial.println();
-  Serial.println("setup");
-  delay(100);
-  //display.init(115200); // default 10ms reset pulse, e.g. for bare panels with DESPI-C02
-  display.init(115200, true, 2, false); // USE THIS for Waveshare boards with "clever" reset circuit, 2ms reset pulse
-  // first update should be full refresh
-  helloWorld(display);
-  delay(1000);
-  // partial refresh mode can be used to full screen,
-  // effective if display panel hasFastPartialUpdate
-  helloFullScreenPartialMode(display);
-  delay(1000);
-  helloArduino(display);
-  delay(1000);
-  helloEpaper(display);
-  delay(1000);
-  //helloValue(display, 123.9, 1);
-  //delay(1000);
-  showFont(display, "FreeMonoBold9pt7b", &FreeMonoBold9pt7b);
-  delay(1000);
-  //BitmapDisplay(display).drawBitmaps();
-  bitmaps.drawBitmaps();
-  //return;
-  if (display.epd2.hasPartialUpdate)
-  {
-    showPartialUpdate();
-    delay(1000);
-  } // else // on GDEW0154Z04 only full update available, doesn't look nice
-  //drawCornerTest();
-  //showBox(16, 16, 48, 32, false);
-  //showBox(16, 56, 48, 32, true);
-  display.powerOff();
-  deepSleepTest();
-  Serial.println("setup done");
-}
-
-void loop()
-{
-}
-
 void deepSleepTest()
 {
   //Serial.println("deepSleepTest");
@@ -272,4 +229,47 @@ void showPartialUpdate()
     while (display.nextPage());
     delay(1000);
   }
+}
+
+void setup()
+{
+  Serial.begin(115200);
+  Serial.println();
+  Serial.println("setup");
+  delay(100);
+  //display.init(115200); // default 10ms reset pulse, e.g. for bare panels with DESPI-C02
+  display.init(115200, true, 2, false); // USE THIS for Waveshare boards with "clever" reset circuit, 2ms reset pulse
+  // first update should be full refresh
+  helloWorld(display);
+  delay(1000);
+  // partial refresh mode can be used to full screen,
+  // effective if display panel hasFastPartialUpdate
+  helloFullScreenPartialMode(display);
+  delay(1000);
+  helloArduino(display);
+  delay(1000);
+  helloEpaper(display);
+  delay(1000);
+  //helloValue(display, 123.9, 1);
+  //delay(1000);
+  showFont(display, "FreeMonoBold9pt7b", &FreeMonoBold9pt7b);
+  delay(1000);
+  //BitmapDisplay(display).drawBitmaps();
+  bitmaps.drawBitmaps();
+  //return;
+  if (display.epd2.hasPartialUpdate)
+  {
+    showPartialUpdate();
+    delay(1000);
+  } // else // on GDEW0154Z04 only full update available, doesn't look nice
+  //drawCornerTest();
+  //showBox(16, 16, 48, 32, false);
+  //showBox(16, 56, 48, 32, true);
+  display.powerOff();
+  deepSleepTest();
+  Serial.println("setup done");
+}
+
+void loop()
+{
 }
