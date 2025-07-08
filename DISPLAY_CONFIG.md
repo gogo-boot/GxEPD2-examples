@@ -12,9 +12,9 @@
 
 ### Configuration Steps
 
-1. **Edit the display selection file** in your example:
+1. **Edit the shared display configuration file**:
    ```
-   src/[EXAMPLE_NAME]/GxEPD2_display_selection_new_style.h
+   include/GxEPD2_display_selection_new_style.h
    ```
 
 2. **Find and uncomment your display**:
@@ -23,7 +23,9 @@
    #define GxEPD2_DRIVER_CLASS GxEPD2_154_D67  // Your display here
    ```
 
-3. **Save the file** and rebuild your project
+3. **Save the file** - This configuration will apply to ALL examples
+
+**✅ Advantage:** Configure once, use with all examples!
 
 ## Display Model Reference
 

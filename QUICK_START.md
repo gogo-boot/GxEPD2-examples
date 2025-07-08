@@ -12,7 +12,7 @@
 
 **⚠️ The examples will NOT work without this step!**
 
-Edit: `src/GxEPD2_HelloWorld/GxEPD2_display_selection_new_style.h`
+Edit: `include/GxEPD2_display_selection_new_style.h`
 
 Find your display and uncomment the corresponding line:
 
@@ -24,6 +24,8 @@ Find your display and uncomment the corresponding line:
 //#define GxEPD2_DRIVER_CLASS GxEPD2_420_T94   // 4.2" 400x300
 //#define GxEPD2_DRIVER_CLASS GxEPD2_750_T7    // 7.5" 800x480
 ```
+
+**✅ Benefit:** This configuration works for ALL examples!
 
 ### 3. Verify Wiring
 

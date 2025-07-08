@@ -2,6 +2,14 @@
 
 A comprehensive PlatformIO project containing all GxEPD2 library examples, converted from Arduino IDE format and optimized for easy development and testing with e-paper displays.
 
+## ✨ Key Features
+
+- **🎯 Unified Configuration** - Configure your display once in `include/` directory, works for all examples
+- **🚀 Ready-to-Use** - All examples pre-configured with PlatformIO environments
+- **📱 Multi-Platform** - ESP32, ESP8266, Arduino Uno, STM32 support
+- **🔧 No Duplication** - Shared headers eliminate configuration redundancy
+- **📖 Comprehensive Docs** - Step-by-step guides for every use case
+
 ## 📚 Documentation
 
 - **🚀 [QUICK_START.md](QUICK_START.md)** - Get running in 30 seconds
@@ -26,7 +34,7 @@ A comprehensive PlatformIO project containing all GxEPD2 library examples, conve
    ```
 
 2. **Configure your display (REQUIRED):**
-   Edit `src/GxEPD2_HelloWorld/GxEPD2_display_selection_new_style.h`:
+   Edit `include/GxEPD2_display_selection_new_style.h`:
    ```cpp
    // Uncomment your display type
    #define GxEPD2_DRIVER_CLASS GxEPD2_154_D67  // For 1.54" displays
@@ -50,6 +58,12 @@ A comprehensive PlatformIO project containing all GxEPD2 library examples, conve
 ```
 GxEPD2-examples/
 ├── platformio.ini          # PlatformIO configuration with all environments
+├── include/                # Shared configuration headers (EDIT THESE!)
+│   ├── GxEPD2_display_selection_new_style.h  # Main display configuration
+│   ├── GxEPD2_display_selection.h            # Alternative display config
+│   ├── GxEPD2_display_selection_added.h      # Additional displays
+│   ├── GxEPD2_selection_check.h              # Display type definitions
+│   └── GxEPD2_wiring_examples.h              # Wiring reference
 ├── lib/
 │   └── GxEPD2/             # Local GxEPD2 library reference
 │       ├── library.json    # Library metadata
@@ -100,9 +114,11 @@ Each example has multiple board variants available:
 
 **⚠️ CRITICAL:** You MUST configure your display type before the examples will work!
 
-Edit the display selection file in your chosen example:
+All examples now use shared configuration files in the `include/` directory:
+
+**Primary configuration file:**
 ```
-src/[EXAMPLE_NAME]/GxEPD2_display_selection_new_style.h
+include/GxEPD2_display_selection_new_style.h
 ```
 
 **Common Display Configurations:**
@@ -124,9 +140,11 @@ src/[EXAMPLE_NAME]/GxEPD2_display_selection_new_style.h
 #define GxEPD2_DRIVER_CLASS GxEPD2_750_T7
 ```
 
+**📖 Complete display list:** See [DISPLAY_CONFIG.md](DISPLAY_CONFIG.md) for all supported displays.
+
 ### Step 2: Verify Wiring
 
-Check `GxEPD2_wiring_examples.h` in your example folder for wiring diagrams.
+Check `include/GxEPD2_wiring_examples.h` for wiring diagrams and examples.
 
 **Standard ESP32 Wiring:**
 ```
