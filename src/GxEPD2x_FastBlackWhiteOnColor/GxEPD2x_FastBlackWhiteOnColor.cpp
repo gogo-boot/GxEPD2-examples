@@ -41,27 +41,6 @@ const uint16_t window_y = 10;
 const uint16_t window_width = 80;
 const uint16_t window_height = 24;
 
-void setup()
-{
-  Serial.begin(115200);
-  Serial.println();
-  display.init(115200);
-  helloWorld();
-  if (display.epd2.panel == GxEPD2::GDEY042Z98)
-  {
-    // the controller SSD1683 of this panel requires old and new data to be equal outside of the partial window
-    // else it would refresh also outside of the partial window
-    display.epd2.writeScreenBuffer(0xFF, 0xFF); // both controller buffers set to white
-    // note that the buffer content is lost by this
-  }
-  // make sure window is only b/w, before using fast b/w refreshes
-  //clearWindow(); // commented out, partial window was cleared by helloWorld()
-  for (uint16_t i = 0; i < 100; i++)
-  {
-    showValue(i);
-  }
-  display.hibernate();
-}
 
 // make sure window is only b/w, before using fast b/w refreshes
 void clearWindow()
@@ -125,6 +104,27 @@ void helloWorld()
     display.print(HelloWorld);
   }
   while (display.nextPage());
+}
+void setup()
+{
+  Serial.begin(115200);
+  Serial.println();
+  display.init(115200);
+  helloWorld();
+  if (display.epd2.panel == GxEPD2::GDEY042Z98)
+  {
+    // the controller SSD1683 of this panel requires old and new data to be equal outside of the partial window
+    // else it would refresh also outside of the partial window
+    display.epd2.writeScreenBuffer(0xFF, 0xFF); // both controller buffers set to white
+    // note that the buffer content is lost by this
+  }
+  // make sure window is only b/w, before using fast b/w refreshes
+  //clearWindow(); // commented out, partial window was cleared by helloWorld()
+  for (uint16_t i = 0; i < 100; i++)
+  {
+    showValue(i);
+  }
+  display.hibernate();
 }
 
 void loop() {};

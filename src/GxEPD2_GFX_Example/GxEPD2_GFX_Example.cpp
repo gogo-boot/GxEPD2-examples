@@ -41,12 +41,12 @@
 #include "TextDisplay.h"
 
 // select the display constructor line in one of the following files (old style):
-#include "GxEPD2_display_selection.h"
-#include "GxEPD2_display_selection_added.h"
+#include <GxEPD2_display_selection.h>
+#include <GxEPD2_display_selection_added.h>
 //#include "GxEPD2_display_selection_more.h" // private
 
 // or select the display class and display driver class in the following file (new style):
-#include "GxEPD2_display_selection_new_style.h"
+#include <GxEPD2_display_selection_new_style.h>
 
 // for handling alternative SPI pins (ESP32, RP2040) see example GxEPD2_Example.ino
 

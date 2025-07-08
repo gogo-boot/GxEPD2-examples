@@ -72,7 +72,7 @@
 
 #endif
 
-// #define EPD_CS before #include "GxEPD2_display_selection_new_style.h" to override default
+// #define EPD_CS before #include <GxEPD2_display_selection_new_style.h> to override default
 #if defined (ESP8266)
 #define SD_CS SS  // e.g. for RobotDyn Wemos D1 mini SD board
 #define EPD_CS D1 // alternative I use with RobotDyn Wemos D1 mini SD board
@@ -123,7 +123,7 @@ SPIClassRP2040 SD_SPI(spi0, SD_MISO_PIN, SD_CS_PIN, SD_CLK_PIN, SD_MOSI_PIN);
 
 // select the display class and display driver class in the following file (new style):
 // don't forget to modify or override EPD_CS if needed
-#include "GxEPD2_display_selection_new_style.h"
+#include <GxEPD2_display_selection_new_style.h>
 
 // note that BMP bitmaps are drawn at physical position in physical orientation of the screen
 

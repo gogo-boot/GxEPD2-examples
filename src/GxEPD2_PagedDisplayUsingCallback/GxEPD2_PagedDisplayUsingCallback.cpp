@@ -34,7 +34,7 @@
 #include <Fonts/FreeMonoBold9pt7b.h>
 
 // select the display class and display driver class in the following file (new style):
-#include "GxEPD2_display_selection_new_style.h"
+#include <GxEPD2_display_selection_new_style.h>
 
 #if !defined(__AVR) && !defined(_BOARD_GENERIC_STM32F103C_H_)
 

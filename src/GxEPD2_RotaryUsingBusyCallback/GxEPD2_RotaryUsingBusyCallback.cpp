@@ -40,7 +40,7 @@
 #include <Fonts/FreeMonoBold9pt7b.h>
 
 // select the display class and display driver class in the following file (new style):
-#include "GxEPD2_display_selection_new_style.h"
+#include <GxEPD2_display_selection_new_style.h>
 
 // include the BasicEncoder adapted for GxEPD2_RotaryUsingBusyCallback.ino example use, without interrupts on any processor
 #include "BasicEncoder.h"

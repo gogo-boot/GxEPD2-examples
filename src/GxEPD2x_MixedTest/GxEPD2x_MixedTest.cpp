@@ -63,31 +63,7 @@ class MyCanvas1 : public GFXcanvas1
 MyCanvas1 current_bw_window(window_width, window_height);
 MyCanvas1 previous_bw_window(window_width, window_height);
 
-void setup()
-{
-  Serial.begin(115200);
-  Serial.println();
-  display.init(115200);
-  helloWorld();
-  if (current_bw_window.getBuffer() && previous_bw_window.getBuffer())
-  {
-    current_bw_window.fillScreen(GxEPD_WHITE);
-    previous_bw_window.fillScreen(GxEPD_WHITE);
-    // only needed if window is not yet white
-    //display.drawImage(current_bw_window.getBuffer(), previous_bw_window.getBuffer(), window_x, window_y, window_width, window_height);
-    for (uint16_t i = 0; i < 100; i++)
-    {
-      showValue(i);
-    }
-  }
-  else
-  {
-    Serial.println("GxEPD2x_MixedTest: canvas buffer allocation failed!");
-    Serial.print("current_bw_window  0x"); Serial.println(uint32_t(current_bw_window.getBuffer()), HEX);
-    Serial.print("previous_bw_window 0x"); Serial.println(uint32_t(previous_bw_window.getBuffer()), HEX);
-  }
-  display.hibernate();
-}
+
 
 void showValue(uint16_t value)
 {
@@ -129,3 +105,29 @@ void helloWorld()
 }
 
 void loop() {};
+
+void setup()
+{
+  Serial.begin(115200);
+  Serial.println();
+  display.init(115200);
+  helloWorld();
+  if (current_bw_window.getBuffer() && previous_bw_window.getBuffer())
+  {
+    current_bw_window.fillScreen(GxEPD_WHITE);
+    previous_bw_window.fillScreen(GxEPD_WHITE);
+    // only needed if window is not yet white
+    //display.drawImage(current_bw_window.getBuffer(), previous_bw_window.getBuffer(), window_x, window_y, window_width, window_height);
+    for (uint16_t i = 0; i < 100; i++)
+    {
+      showValue(i);
+    }
+  }
+  else
+  {
+    Serial.println("GxEPD2x_MixedTest: canvas buffer allocation failed!");
+    Serial.print("current_bw_window  0x"); Serial.println(uint32_t(current_bw_window.getBuffer()), HEX);
+    Serial.print("previous_bw_window 0x"); Serial.println(uint32_t(previous_bw_window.getBuffer()), HEX);
+  }
+  display.hibernate();
+}

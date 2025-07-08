@@ -48,7 +48,7 @@
 #define FileClass fs::File
 
 // select the display class and display driver class in the following file (new style):
-#include "GxEPD2_display_selection_new_style.h"
+#include <GxEPD2_display_selection_new_style.h>
 
 // function declaration with default parameter
 // note that BMP bitmaps are drawn at physical position in physical orientation of the screen

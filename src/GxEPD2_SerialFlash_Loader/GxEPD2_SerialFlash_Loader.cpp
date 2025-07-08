@@ -56,70 +56,6 @@ const char* path_prenticedavid   = "/prenticedavid/MCUFRIEND_kbv/master/extras/b
 const char* path_waveshare_c  = "/waveshare/e-Paper/master/RaspberryPi_JetsonNano/c/pic/";
 const char* path_waveshare_py = "/waveshare/e-Paper/master/RaspberryPi_JetsonNano/python/pic/";
 
-void setup()
-{
-  Serial.begin(115200);
-  Serial.println();
-  Serial.println("GxEPD2_SerialFlash_Loader");
-
-#ifdef RE_INIT_NEEDED
-  WiFi.persistent(true);
-  WiFi.mode(WIFI_STA); // switch off AP
-  WiFi.setAutoConnect(true);
-  WiFi.setAutoReconnect(true);
-  WiFi.disconnect();
-#endif
-
-  if (!WiFi.getAutoConnect() || ( WiFi.getMode() != WIFI_STA) || ((WiFi.SSID() != ssid) && String(ssid) != "........"))
-  {
-    Serial.println();
-    Serial.print("WiFi.getAutoConnect()=");
-    Serial.println(WiFi.getAutoConnect());
-    Serial.print("WiFi.SSID()=");
-    Serial.println(WiFi.SSID());
-    WiFi.mode(WIFI_STA); // switch off AP
-    Serial.print("Connecting to ");
-    Serial.println(ssid);
-    WiFi.begin(ssid, password);
-  }
-  int ConnectTimeout = 30; // 15 seconds
-  while (WiFi.status() != WL_CONNECTED)
-  {
-    delay(500);
-    Serial.print(".");
-    Serial.print(WiFi.status());
-    if (--ConnectTimeout <= 0)
-    {
-      Serial.println();
-      Serial.println("WiFi connect timeout");
-      return;
-    }
-  }
-  Serial.println();
-  Serial.println("WiFi connected");
-
-  // Print the IP address
-  Serial.println(WiFi.localIP());
-
-  setClock();
-
-  if (!SerialFlash.begin(FlashChipSelect)) 
-  {
-    Serial.println("Unable to access SPI Flash chip");
-    return;
-  }
-  Serial.println("SerialFlash started");
-  eraseSerialFlash();
-  listFiles();
-  downloadBitmaps_200x200();
-  downloadBitmaps_other();
-  downloadBitmaps_test();
-  listFiles();
-}
-
-void loop()
-{
-}
 
 void listFiles()
 {
@@ -458,4 +394,62 @@ void setClock()
   gmtime_r(&now, &timeinfo);
   Serial.print("Current time: ");
   Serial.print(asctime(&timeinfo));
+}
+void setup() { Serial.begin(115200); Serial.println(); Serial.println("GxEPD2_SerialFlash_Loader"); #ifdef RE_INIT_NEEDED
+  WiFi.persistent(true);
+  WiFi.mode(WIFI_STA); // switch off AP
+  WiFi.setAutoConnect(true);
+  WiFi.setAutoReconnect(true);
+  WiFi.disconnect();
+#endif
+
+  if (!WiFi.getAutoConnect() || ( WiFi.getMode() != WIFI_STA) || ((WiFi.SSID() != ssid) && String(ssid) != "........"))
+  {
+    Serial.println();
+    Serial.print("WiFi.getAutoConnect()=");
+    Serial.println(WiFi.getAutoConnect());
+    Serial.print("WiFi.SSID()=");
+    Serial.println(WiFi.SSID());
+    WiFi.mode(WIFI_STA); // switch off AP
+    Serial.print("Connecting to ");
+    Serial.println(ssid);
+    WiFi.begin(ssid, password);
+  }
+  int ConnectTimeout = 30; // 15 seconds
+  while (WiFi.status() != WL_CONNECTED)
+  {
+    delay(500);
+    Serial.print(".");
+    Serial.print(WiFi.status());
+    if (--ConnectTimeout <= 0)
+    {
+      Serial.println();
+      Serial.println("WiFi connect timeout");
+      return;
+    }
+  }
+  Serial.println();
+  Serial.println("WiFi connected");
+
+  // Print the IP address
+  Serial.println(WiFi.localIP());
+
+  setClock();
+
+  if (!SerialFlash.begin(FlashChipSelect)) 
+  {
+    Serial.println("Unable to access SPI Flash chip");
+    return;
+  }
+  Serial.println("SerialFlash started");
+  eraseSerialFlash();
+  listFiles();
+  downloadBitmaps_200x200();
+  downloadBitmaps_other();
+  downloadBitmaps_test();
+  listFiles();
+}
+
+void loop()
+{
 }

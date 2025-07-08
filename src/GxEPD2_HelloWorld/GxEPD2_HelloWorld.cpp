@@ -32,11 +32,11 @@
 #include <Fonts/FreeMonoBold9pt7b.h>
 
 // select the display class and display driver class in the following file (new style):
-#include "GxEPD2_display_selection_new_style.h"
+#include <GxEPD2_display_selection_new_style.h>
 
 // or select the display constructor line in one of the following files (old style):
-#include "GxEPD2_display_selection.h"
-#include "GxEPD2_display_selection_added.h"
+#include <GxEPD2_display_selection.h>
+#include <GxEPD2_display_selection_added.h>
 
 // alternately you can copy the constructor from GxEPD2_display_selection.h or GxEPD2_display_selection_added.h to here
 // e.g. for Wemos D1 mini:

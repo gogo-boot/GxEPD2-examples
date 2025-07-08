@@ -36,7 +36,7 @@
 
 // select the display class and display driver class in the following file (new style):
 // note that many of these selections would require paged display to fit in ram
-#include "GxEPD2_display_selection_new_style.h"
+#include <GxEPD2_display_selection_new_style.h>
 
 // or select the display constructor line below (old style), double commented out selections don't fit in ram:
 // note: this list may not get updated with new panels

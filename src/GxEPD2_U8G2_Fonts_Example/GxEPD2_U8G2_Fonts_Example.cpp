@@ -39,36 +39,12 @@
 #include <U8g2_for_Adafruit_GFX.h>
 
 // select the display class and display driver class in the following file (new style):
-#include "GxEPD2_display_selection_new_style.h"
+#include <GxEPD2_display_selection_new_style.h>
 
 U8G2_FOR_ADAFRUIT_GFX u8g2Fonts;
 
 // for handling alternative SPI pins (ESP32, RP2040) see example GxEPD2_Example.ino
 
-void setup()
-{
-  Serial.begin(115200);
-  Serial.println();
-  Serial.println("setup");
-  //display.init(115200); // default 10ms reset pulse, e.g. for bare panels with DESPI-C02
-  display.init(115200, true, 2, false); // USE THIS for Waveshare boards with "clever" reset circuit, 2ms reset pulse
-  u8g2Fonts.begin(display); // connect u8g2 procedures to Adafruit GFX
-  helloWorld();
-  delay(1000);
-  helloArduino();
-  delay(1000);
-  helloEpaper();
-  delay(1000);
-  showFont("u8g2_font_helvR14_tf", u8g2_font_helvR14_tf); // select u8g2 font from here: https://github.com/olikraus/u8g2/wiki/fntlistall
-  delay(2000);
-  showFont("u8g2_font_profont22_mr", u8g2_font_profont22_mr); // select u8g2 font from here: https://github.com/olikraus/u8g2/wiki/fntlistall
-  delay(1000);
-  Serial.println("setup done");
-}
-
-void loop()
-{
-}
 
 const char HelloWorld[] = "Hello World!";
 const char HelloArduino[] = "Hello Arduino!";
@@ -192,4 +168,29 @@ void drawFont(const char name[])
   u8g2Fonts.println("`abcdefghijklmno");
   u8g2Fonts.println("pqrstuvwxyz{|}~ ");
   u8g2Fonts.println("Umlaut ÄÖÜäéöü");
+}
+
+void setup()
+{
+  Serial.begin(115200);
+  Serial.println();
+  Serial.println("setup");
+  //display.init(115200); // default 10ms reset pulse, e.g. for bare panels with DESPI-C02
+  display.init(115200, true, 2, false); // USE THIS for Waveshare boards with "clever" reset circuit, 2ms reset pulse
+  u8g2Fonts.begin(display); // connect u8g2 procedures to Adafruit GFX
+  helloWorld();
+  delay(1000);
+  helloArduino();
+  delay(1000);
+  helloEpaper();
+  delay(1000);
+  showFont("u8g2_font_helvR14_tf", u8g2_font_helvR14_tf); // select u8g2 font from here: https://github.com/olikraus/u8g2/wiki/fntlistall
+  delay(2000);
+  showFont("u8g2_font_profont22_mr", u8g2_font_profont22_mr); // select u8g2 font from here: https://github.com/olikraus/u8g2/wiki/fntlistall
+  delay(1000);
+  Serial.println("setup done");
+}
+
+void loop()
+{
 }

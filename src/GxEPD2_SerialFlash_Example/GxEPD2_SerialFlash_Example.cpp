@@ -72,7 +72,7 @@ const int FlashChipSelect = 2; // as used with my ESP32 protoboard SD connector
 
 // select the display class and display driver class in the following file (new style):
 // don't forget to modify or override EPD_CS if needed
-#include "GxEPD2_display_selection_new_style.h"
+#include <GxEPD2_display_selection_new_style.h>
 
 // function declaration with default parameter
 // note that BMP bitmaps are drawn at physical position in physical orientation of the screen

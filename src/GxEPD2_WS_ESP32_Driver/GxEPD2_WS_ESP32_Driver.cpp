@@ -180,50 +180,7 @@ GxEPD2_DISPLAY_CLASS<GxEPD2_DRIVER_CLASS, MAX_HEIGHT(GxEPD2_DRIVER_CLASS)> displ
 SPIClass hspi(HSPI);
 #endif
 
-void setup()
-{
-  Serial.begin(115200);
-  Serial.println();
-  Serial.println("setup");
-  // *** special handling for Waveshare ESP32 Driver board *** //
-  // ********************************************************* //
-#if defined(ESP32) && defined(USE_HSPI_FOR_EPD)
-  hspi.begin(13, 12, 14, 15); // remap hspi for EPD (swap pins)
-  display.epd2.selectSPI(hspi, SPISettings(4000000, MSBFIRST, SPI_MODE0));
-#endif
-  // *** end of special handling for Waveshare ESP32 Driver board *** //
-  // **************************************************************** //
-  display.init(115200);
-  // first update should be full refresh
-  helloWorld();
-  delay(1000);
-  // partial refresh mode can be used to full screen,
-  // effective if display panel hasFastPartialUpdate
-  helloFullScreenPartialMode();
-  delay(1000);
-  helloArduino();
-  delay(1000);
-  helloEpaper();
-  delay(1000);
-  showFont("FreeMonoBold9pt7b", &FreeMonoBold9pt7b);
-  delay(1000);
-  drawBitmaps();
-  if (display.epd2.hasPartialUpdate)
-  {
-    showPartialUpdate();
-    delay(1000);
-  } // else // on GDEW0154Z04 only full update available, doesn't look nice
-  //drawCornerTest();
-  //showBox(16, 16, 48, 32, false);
-  //showBox(16, 56, 48, 32, true);
-  display.powerOff();
-  deepSleepTest();
-  Serial.println("setup done");
-}
 
-void loop()
-{
-}
 
 // note for partial update window and setPartialWindow() method:
 // partial update window size and position is on byte boundary in physical x direction
@@ -1187,3 +1144,48 @@ void drawBitmaps3c400x300()
   }
 }
 #endif
+
+void setup()
+{
+  Serial.begin(115200);
+  Serial.println();
+  Serial.println("setup");
+  // *** special handling for Waveshare ESP32 Driver board *** //
+  // ********************************************************* //
+#if defined(ESP32) && defined(USE_HSPI_FOR_EPD)
+  hspi.begin(13, 12, 14, 15); // remap hspi for EPD (swap pins)
+  display.epd2.selectSPI(hspi, SPISettings(4000000, MSBFIRST, SPI_MODE0));
+#endif
+  // *** end of special handling for Waveshare ESP32 Driver board *** //
+  // **************************************************************** //
+  display.init(115200);
+  // first update should be full refresh
+  helloWorld();
+  delay(1000);
+  // partial refresh mode can be used to full screen,
+  // effective if display panel hasFastPartialUpdate
+  helloFullScreenPartialMode();
+  delay(1000);
+  helloArduino();
+  delay(1000);
+  helloEpaper();
+  delay(1000);
+  showFont("FreeMonoBold9pt7b", &FreeMonoBold9pt7b);
+  delay(1000);
+  drawBitmaps();
+  if (display.epd2.hasPartialUpdate)
+  {
+    showPartialUpdate();
+    delay(1000);
+  } // else // on GDEW0154Z04 only full update available, doesn't look nice
+  //drawCornerTest();
+  //showBox(16, 16, 48, 32, false);
+  //showBox(16, 56, 48, 32, true);
+  display.powerOff();
+  deepSleepTest();
+  Serial.println("setup done");
+}
+
+void loop()
+{
+}

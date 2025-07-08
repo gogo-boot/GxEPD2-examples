@@ -52,7 +52,7 @@
 //#include "GxEPD2_display_selection_added.h"
 
 // or select the display class and display driver class in the following file (new style):
-#include "GxEPD2_display_selection_new_style.h"
+#include <GxEPD2_display_selection_new_style.h>
 
 //#define WITHOUT_BITMAPS
 #ifndef WITHOUT_BITMAPS
