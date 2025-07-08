@@ -152,35 +152,6 @@ GxEPD2_DRIVER_CLASS display(/*CS=10*/ EPD_CS, /*DC=*/ 8, /*RST=*/ 9, /*BUSY=*/ 7
 // function declaration with default parameter
 void drawBitmapFromSD(const char *filename, int16_t x, int16_t y, bool with_color = true);
 
-void setup()
-{
-  Serial.begin(115200);
-  Serial.println();
-  Serial.println(F("GxEPD2_SD_AVR_Example"));
-
-  display.init(115200);
-
-  Serial.print(F("Initializing SD card..."));
-  if (!SD.begin(SD_CS))
-  {
-    Serial.println(F("SD failed!"));
-    return;
-  }
-  Serial.println(F("SD OK!"));
-
-  drawBitmaps_200x200();
-  drawBitmaps_other();
-
-  //drawBitmaps_test();
-
-  display.hibernate();
-
-  Serial.println(F("GxEPD2_SD_AVR_Example done"));
-}
-
-void loop(void)
-{
-}
 
 void drawBitmaps_200x200()
 {
@@ -478,4 +449,34 @@ uint32_t read32(SdFile& f)
   ((uint8_t *)&result)[2] = f.read();
   ((uint8_t *)&result)[3] = f.read(); // MSB
   return result;
+}
+
+void setup()
+{
+  Serial.begin(115200);
+  Serial.println();
+  Serial.println(F("GxEPD2_SD_AVR_Example"));
+
+  display.init(115200);
+
+  Serial.print(F("Initializing SD card..."));
+  if (!SD.begin(SD_CS))
+  {
+    Serial.println(F("SD failed!"));
+    return;
+  }
+  Serial.println(F("SD OK!"));
+
+  drawBitmaps_200x200();
+  drawBitmaps_other();
+
+  //drawBitmaps_test();
+
+  display.hibernate();
+
+  Serial.println(F("GxEPD2_SD_AVR_Example done"));
+}
+
+void loop(void)
+{
 }

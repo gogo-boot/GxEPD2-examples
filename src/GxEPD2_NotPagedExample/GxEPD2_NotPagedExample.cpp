@@ -384,55 +384,6 @@
 
 // for handling alternative SPI pins (ESP32, RP2040) see example GxEPD2_Example.ino
 
-void setup()
-{
-  Serial.begin(115200);
-  Serial.println();
-  Serial.println("setup");
-  delay(100);
-  //display.init(115200); // default 10ms reset pulse, e.g. for bare panels with DESPI-C02
-  display.init(115200, true, 2, false); // USE THIS for Waveshare boards with "clever" reset circuit, 2ms reset pulse
-  if (display.pages() > 1)
-  {
-    delay(100);
-    Serial.print("pages = "); Serial.print(display.pages()); Serial.print(" page height = "); Serial.println(display.pageHeight());
-    delay(1000);
-    showPages();
-    display.hibernate();
-    return;
-  }
-  // first update should be full refresh
-  helloWorld();
-  delay(1000);
-  // partial refresh mode can be used to full screen,
-  // effective if display panel hasFastPartialUpdate
-  helloFullScreenPartialMode();
-  delay(1000);
-  helloArduino();
-  delay(1000);
-  helloEpaper();
-  delay(1000);
-  //helloValue(123.9, 1);
-  //delay(1000);
-  showFont("FreeMonoBold9pt7b", &FreeMonoBold9pt7b);
-  delay(1000);
-  drawBitmaps();
-  if (display.epd2.hasPartialUpdate)
-  {
-    showPartialUpdate();
-    delay(1000);
-  } // else // on GDEW0154Z04 only full update available, doesn't look nice
-  //drawCornerTest();
-  //showBox(16, 16, 48, 32, false);
-  //showBox(16, 56, 48, 32, true);
-  display.powerOff();
-  deepSleepTest();
-  Serial.println("setup done");
-}
-
-void loop()
-{
-}
 
 void showPages()
 {
@@ -1355,3 +1306,53 @@ void drawBitmaps3c400x300()
   }
 }
 #endif
+
+void setup()
+{
+  Serial.begin(115200);
+  Serial.println();
+  Serial.println("setup");
+  delay(100);
+  //display.init(115200); // default 10ms reset pulse, e.g. for bare panels with DESPI-C02
+  display.init(115200, true, 2, false); // USE THIS for Waveshare boards with "clever" reset circuit, 2ms reset pulse
+  if (display.pages() > 1)
+  {
+    delay(100);
+    Serial.print("pages = "); Serial.print(display.pages()); Serial.print(" page height = "); Serial.println(display.pageHeight());
+    delay(1000);
+    showPages();
+    display.hibernate();
+    return;
+  }
+  // first update should be full refresh
+  helloWorld();
+  delay(1000);
+  // partial refresh mode can be used to full screen,
+  // effective if display panel hasFastPartialUpdate
+  helloFullScreenPartialMode();
+  delay(1000);
+  helloArduino();
+  delay(1000);
+  helloEpaper();
+  delay(1000);
+  //helloValue(123.9, 1);
+  //delay(1000);
+  showFont("FreeMonoBold9pt7b", &FreeMonoBold9pt7b);
+  delay(1000);
+  drawBitmaps();
+  if (display.epd2.hasPartialUpdate)
+  {
+    showPartialUpdate();
+    delay(1000);
+  } // else // on GDEW0154Z04 only full update available, doesn't look nice
+  //drawCornerTest();
+  //showBox(16, 16, 48, 32, false);
+  //showBox(16, 56, 48, 32, true);
+  display.powerOff();
+  deepSleepTest();
+  Serial.println("setup done");
+}
+
+void loop()
+{
+}

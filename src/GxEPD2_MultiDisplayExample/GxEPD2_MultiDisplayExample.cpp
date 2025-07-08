@@ -153,89 +153,6 @@ GxEPD2_3C<GxEPD2_750c, GxEPD2_750c::HEIGHT> display4(GxEPD2_750c(/*CS=*/ CS_4, /
 #include "bitmaps/Bitmaps3c176x264.h" // 2.7"  b/w/r
 #include "bitmaps/Bitmaps3c400x300.h" // 4.2"  b/w/r
 
-void setup()
-{
-  Serial.begin(115200);
-  Serial.println();
-  Serial.println("setup");
-
-  // one common reset for all displays
-  digitalWrite(RST_PIN, HIGH);
-  pinMode(RST_PIN, OUTPUT);
-  delay(20);
-  digitalWrite(RST_PIN, LOW);
-  delay(20);
-  digitalWrite(RST_PIN, HIGH);
-  delay(200);
-
-  display1.init(115200); // enable diagnostic output on Serial
-  display2.init(115200); // enable diagnostic output on Serial
-  display3.init(115200); // enable diagnostic output on Serial
-#if defined(ESP32)
-  display4.init(115200); // enable diagnostic output on Serial
-#endif
-  // first update should be full refresh
-  helloWorld(display1);
-  helloWorld(display2);
-  helloWorld(display3);
-#if defined(ESP32)
-  helloWorld(display4);
-#endif
-  delay(1000);
-  // partial refresh mode can be used to full screen,
-  // effective if display panel hasFastPartialUpdate
-  helloFullScreenPartialMode(display1);
-  helloFullScreenPartialMode(display2);
-  helloFullScreenPartialMode(display3);
-#if defined(ESP32)
-  helloFullScreenPartialMode(display4);
-#endif
-  delay(1000);
-  helloArduino(display1);
-  helloArduino(display2);
-  helloArduino(display3);
-#if defined(ESP32)
-  helloArduino(display4);
-#endif
-  delay(1000);
-  helloEpaper(display1);
-  helloEpaper(display2);
-  helloEpaper(display3);
-#if defined(ESP32)
-  helloEpaper(display4);
-#endif
-  delay(1000);
-  showFont(display1, "FreeMonoBold9pt7b", &FreeMonoBold9pt7b);
-  showFont(display2, "FreeMonoBold9pt7b", &FreeMonoBold9pt7b);
-  showFont(display3, "FreeMonoBold9pt7b", &FreeMonoBold9pt7b);
-#if defined(ESP32)
-  showFont(display4, "FreeMonoBold9pt7b", &FreeMonoBold9pt7b);
-#endif
-  delay(1000);
-  drawBitmaps(display1);
-  drawBitmaps(display2);
-  drawBitmaps(display3);
-#if defined(ESP32)
-  drawBitmaps(display4);
-#endif
-//  if (display1.epd2.hasPartialUpdate)
-//  {
-//    showPartialUpdate(display1);
-//    delay(1000);
-//  } // else // on GDEW0154Z04 only full update available, doesn't look nice
-  //drawCornerTest(display1);
-  //showBox(display1, 16, 16, 48, 32, false);
-  //showBox(display1, 16, 56, 48, 32, true);
-  display1.powerOff();
-  display2.powerOff();
-  display3.powerOff();
-  Serial.println("setup done");
-}
-
-void loop()
-{
-}
-
 
 void helloWorld(GxEPD2_GFX& display)
 {
@@ -1021,4 +938,87 @@ void drawBitmaps(GxEPD2_GFX& display)
 #ifdef _GxBitmaps3c200x200_H_
   drawBitmaps3c200x200(display);
 #endif
+}
+
+void setup()
+{
+  Serial.begin(115200);
+  Serial.println();
+  Serial.println("setup");
+
+  // one common reset for all displays
+  digitalWrite(RST_PIN, HIGH);
+  pinMode(RST_PIN, OUTPUT);
+  delay(20);
+  digitalWrite(RST_PIN, LOW);
+  delay(20);
+  digitalWrite(RST_PIN, HIGH);
+  delay(200);
+
+  display1.init(115200); // enable diagnostic output on Serial
+  display2.init(115200); // enable diagnostic output on Serial
+  display3.init(115200); // enable diagnostic output on Serial
+#if defined(ESP32)
+  display4.init(115200); // enable diagnostic output on Serial
+#endif
+  // first update should be full refresh
+  helloWorld(display1);
+  helloWorld(display2);
+  helloWorld(display3);
+#if defined(ESP32)
+  helloWorld(display4);
+#endif
+  delay(1000);
+  // partial refresh mode can be used to full screen,
+  // effective if display panel hasFastPartialUpdate
+  helloFullScreenPartialMode(display1);
+  helloFullScreenPartialMode(display2);
+  helloFullScreenPartialMode(display3);
+#if defined(ESP32)
+  helloFullScreenPartialMode(display4);
+#endif
+  delay(1000);
+  helloArduino(display1);
+  helloArduino(display2);
+  helloArduino(display3);
+#if defined(ESP32)
+  helloArduino(display4);
+#endif
+  delay(1000);
+  helloEpaper(display1);
+  helloEpaper(display2);
+  helloEpaper(display3);
+#if defined(ESP32)
+  helloEpaper(display4);
+#endif
+  delay(1000);
+  showFont(display1, "FreeMonoBold9pt7b", &FreeMonoBold9pt7b);
+  showFont(display2, "FreeMonoBold9pt7b", &FreeMonoBold9pt7b);
+  showFont(display3, "FreeMonoBold9pt7b", &FreeMonoBold9pt7b);
+#if defined(ESP32)
+  showFont(display4, "FreeMonoBold9pt7b", &FreeMonoBold9pt7b);
+#endif
+  delay(1000);
+  drawBitmaps(display1);
+  drawBitmaps(display2);
+  drawBitmaps(display3);
+#if defined(ESP32)
+  drawBitmaps(display4);
+#endif
+//  if (display1.epd2.hasPartialUpdate)
+//  {
+//    showPartialUpdate(display1);
+//    delay(1000);
+//  } // else // on GDEW0154Z04 only full update available, doesn't look nice
+  //drawCornerTest(display1);
+  //showBox(display1, 16, 16, 48, 32, false);
+  //showBox(display1, 16, 56, 48, 32, true);
+  display1.powerOff();
+  display2.powerOff();
+  display3.powerOff();
+  Serial.println("setup done");
+}
+
+void loop()
+{
 }

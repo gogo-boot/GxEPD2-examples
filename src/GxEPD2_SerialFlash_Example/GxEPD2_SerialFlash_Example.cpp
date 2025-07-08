@@ -84,48 +84,6 @@ void drawBitmapFromSerialFlash(const char *filename, int16_t x, int16_t y, bool 
 // overwrite = true does not clear buffer before drawing, use only if buffer is full height
 void drawBitmapFromSerialFlash_Buffered(const char *filename, int16_t x, int16_t y, bool with_color = true, bool partial_update = false, bool overwrite = false);
 
-void setup()
-{
-  Serial.begin(115200);
-  Serial.println();
-  Serial.println("GxEPD2_SerialFlash_Example");
-
-#if defined(ESP32) && defined(USE_HSPI_FOR_EPD)
-  hspi.begin(13, 12, 14, 15); // remap hspi for EPD (swap pins)
-  display.epd2.selectSPI(hspi, SPISettings(4000000, MSBFIRST, SPI_MODE0));
-#endif
-
-  //display.init(115200); // default 10ms reset pulse, e.g. for bare panels with DESPI-C02
-  display.init(115200, true, 2, false); // USE THIS for Waveshare boards with "clever" reset circuit, 2ms reset pulse
-
-  if (!SerialFlash.begin(FlashChipSelect))
-  {
-    Serial.println("Unable to access SPI Flash chip");
-    return;
-  }
-  Serial.println("SerialFlash started");
-
-  listFiles();
-
-  if ((display.epd2.panel == GxEPD2::GDEW0154Z04) || (display.epd2.panel == GxEPD2::ACeP565) || (display.epd2.panel == GxEPD2::GDEY073D46) || false)
-  {
-    //drawBitmapsBuffered_200x200();
-    //drawBitmapsBuffered_other();
-    drawBitmapsBuffered_test();
-  }
-  else
-  {
-    drawBitmaps_200x200();
-    drawBitmaps_other();
-    //drawBitmaps_test();
-  }
-
-  Serial.println("GxEPD2_SerialFlash_Example done");
-}
-
-void loop(void)
-{
-}
 
 void listFiles()
 {
@@ -719,4 +677,47 @@ uint32_t read32(SerialFlashFile& f)
   uint32_t result;
   f.read((void*)&result, 4);
   return result;
+}
+
+void setup()
+{
+  Serial.begin(115200);
+  Serial.println();
+  Serial.println("GxEPD2_SerialFlash_Example");
+
+#if defined(ESP32) && defined(USE_HSPI_FOR_EPD)
+  hspi.begin(13, 12, 14, 15); // remap hspi for EPD (swap pins)
+  display.epd2.selectSPI(hspi, SPISettings(4000000, MSBFIRST, SPI_MODE0));
+#endif
+
+  //display.init(115200); // default 10ms reset pulse, e.g. for bare panels with DESPI-C02
+  display.init(115200, true, 2, false); // USE THIS for Waveshare boards with "clever" reset circuit, 2ms reset pulse
+
+  if (!SerialFlash.begin(FlashChipSelect))
+  {
+    Serial.println("Unable to access SPI Flash chip");
+    return;
+  }
+  Serial.println("SerialFlash started");
+
+  listFiles();
+
+  if ((display.epd2.panel == GxEPD2::GDEW0154Z04) || (display.epd2.panel == GxEPD2::ACeP565) || (display.epd2.panel == GxEPD2::GDEY073D46) || false)
+  {
+    //drawBitmapsBuffered_200x200();
+    //drawBitmapsBuffered_other();
+    drawBitmapsBuffered_test();
+  }
+  else
+  {
+    drawBitmaps_200x200();
+    drawBitmaps_other();
+    //drawBitmaps_test();
+  }
+
+  Serial.println("GxEPD2_SerialFlash_Example done");
+}
+
+void loop(void)
+{
 }
